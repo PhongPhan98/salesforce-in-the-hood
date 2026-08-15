@@ -1,0 +1,33 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header">
+            <h2 class="slds-card__header-title">External Users</h2>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </template>
+
+            <template if:true={error}>
+                <div class="slds-text-color_error">
+                    Error: {error}
+                </div>
+            </template>
+
+            <template if:true={hasNoUsers}>
+                <p>No external users found.</p>
+            </template>
+
+            <template if:true={hasUsers}>
+                <lightning-datatable
+                    key-field="id"
+                    data={users}
+                    columns={columns}
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </template>
+
+        </div>
+    </div>
+</template>
