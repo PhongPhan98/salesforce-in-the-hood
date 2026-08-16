@@ -1,0 +1,58 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">Submit New External User</h2>
+                </div>
+            </header>
+        </div>
+
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-form slds-form_stacked">
+                <div class="slds-form-element slds-p-bottom_small">
+                    <lightning-input
+                        label="Name"
+                        value={name}
+                        onchange={handleNameChange}
+                        required>
+                    </lightning-input>
+                </div>
+                <div class="slds-form-element slds-p-bottom_small">
+                    <lightning-input
+                        type="email"
+                        label="Email"
+                        value={email}
+                        onchange={handleEmailChange}
+                        required>
+                    </lightning-input>
+                </div>
+                <lightning-button
+                    variant="brand"
+                    label="Submit"
+                    onclick={handleSubmit}
+                    disabled={isFormInvalid}>
+                </lightning-button>
+                <template if:true={isSubmitting}>
+                    <lightning-spinner alternative-text="Submitting" size="small"></lightning-spinner>
+                </template>
+            </div>
+
+            <template if:true={response}>
+                <div class="slds-box slds-theme_success slds-m-top_medium">
+                    <p class="slds-text-title_bold">Submitted successfully</p>
+                    <p>ID: {response.id}</p>
+                    <p>Name: {response.name}</p>
+                    <p>Email: {response.email}</p>
+                </div>
+            </template>
+
+            <template if:true={error}>
+                <div class="slds-box slds-theme_error slds-m-top_medium">
+                    <p class="slds-text-title_bold">Submission failed</p>
+                    <p>{error}</p>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>
